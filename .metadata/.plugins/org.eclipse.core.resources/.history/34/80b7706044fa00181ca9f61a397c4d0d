@@ -1,0 +1,15 @@
+package ie.gmit.sw;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface DatabaseServer extends Remote{
+	
+	public void read() throws RemoteException;
+	
+	public String update(String s) throws RemoteException;
+	
+	public String create(String s) throws RemoteException;
+	
+	public String delete(String s) throws RemoteException;
+}

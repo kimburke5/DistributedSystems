@@ -1,0 +1,14 @@
+package ie.gmit.DAO;
+
+public class mySQL {
+	
+	public void read() {
+		System.out.println("GetData");
+	}
+
+	public void getData() {
+		// TODO Auto-generated method stub
+		System.out.println("GetData");
+	}
+
+}

@@ -1,0 +1,73 @@
+package ie.gmit.sw;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.sTATEMENT;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mysql.cj.xdevapi.Statement;
+
+import ie.gmit.DAO.mySQL;
+import ie.gmit.models.CustOrder;
+
+public class ServerImplement extends UnicastRemoteObject implements DatabaseServer{
+
+	private static final long serialVersionUID = 1L;
+	private Connection connection;
+	private Statement statement;
+	
+	protected ServerImplement() throws RemoteException {
+		super();
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/CustOrder?useSSL=false","root","");
+		
+	}
+
+	public List<CustOrder> read() throws RemoteException, SQLException; {
+		System.out.println("In read");
+		statement = connection.createStatement();
+		
+		List<CustOrder> List = new ArrayList<CustOrder>();
+		String strSelect = "select * from CustOrder ORDER BY OrderID";
+		
+		ResultSet reset = statement.executeQuery(stringSelect);
+		while (reset.next()) { 
+			int OrderID = reset.getInt("OrderID");
+			int CustID = reset.getInt("CustID");
+			int carID = reset.getInt("CarID");
+
+			CustOrder s = new CustOrder();
+			s.setOrderID(OrderID);
+			s.setCustID(CustID);
+			s.setCarID(carID);
+			List.add(s);
+		}
+		
+		return List;
+		
+	}
+
+	@Override
+	public String update(String s) {
+		new mySQL().getData();
+		return s;
+	}
+
+	@Override
+	public String create(String s) {
+		new mySQL().getData();
+		return s;
+	}
+
+	@Override
+	public String delete(String s) {
+		new mySQL().getData();
+		return null;
+	}
+
+	
+}
+

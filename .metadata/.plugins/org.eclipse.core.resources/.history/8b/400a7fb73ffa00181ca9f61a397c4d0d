@@ -1,0 +1,38 @@
+package ie.gmit.sw;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+import ie.gmit.DAO.mySQL;
+
+public class ServerImplement extends UnicastRemoteObject implements DatabaseServer{
+
+	private static final long serialVersionUID = 1L;
+	
+	public ServerImplement() throws RemoteException {
+		super();
+		
+	}
+
+	public void read() {
+		new mySQL().getData();
+		
+	}
+
+	public String update(String s) {
+		new mySQL().getData();
+		return s;
+	}
+
+	public String create(String s) {
+		new mySQL().getData();
+		return s;
+	}
+
+	public String delete(String s) {
+		new mySQL().getData();
+		return null;
+	}
+
+	
+}
